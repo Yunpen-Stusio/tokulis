@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>トクリス - アプリサポート</title>
+    <title>トクリス - スーパーの最安値が一目でわかるアプリ</title>
     <style>
+        /* 基本設定 */
         * {
             margin: 0;
             padding: 0;
@@ -12,426 +13,539 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', sans-serif;
+            line-height: 1.7;
+            color: #4C443E;
+            background: #FEFEFE;
         }
 
+        /* ヘッダー */
+        header {
+            background: #F49340;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(244, 147, 64, 0.2);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FEFEFE;
+        }
+
+        nav a {
+            color: #FEFEFE;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            position: relative;
+            color: #FEFEFE;
+            padding: 0;
+            margin-top: 60px;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(244, 147, 64, 0.85) 0%, rgba(255, 140, 66, 0.85) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .download-btn {
+            display: inline-block;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .download-btn img {
+            width: 224px;
+            height: 82px;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+        }
+
+        .download-btn:hover img {
+            transform: scale(1.05);
+        }
+
+        /* コンテナ */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header Section */
-        .header {
-            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-            padding: 60px 0;
+        /* セクション共通 */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
             text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #4C443E;
         }
 
-        .app-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #ff6b35 0%, #e55a2b 100%);
-            border-radius: 16px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .app-icon img {
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-        }
-
-        .app-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .app-subtitle {
+        .section-subtitle {
+            text-align: center;
+            color: #4C443E;
+            opacity: 0.8;
+            margin-bottom: 3rem;
             font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 40px;
         }
 
-        /* Main Content */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-            padding: 60px 0;
+        /* 問題提起セクション */
+        .problems {
+            background: #FEFEFE;
         }
 
-        .phone-mockup {
-            text-align: center;
-        }
-
-        .phone-mockup img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 35px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .phone {
-            width: 280px;
-            height: 560px;
-            background: #000;
-            border-radius: 35px;
-            padding: 8px;
+        .problem-list {
+            max-width: 800px;
             margin: 0 auto;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            border-radius: 27px;
-            padding: 40px 20px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .phone-header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .phone-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .price-list {
-            list-style: none;
-        }
-
-        .price-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .item-name {
-            font-size: 14px;
-            color: #333;
-        }
-
-        .item-price {
-            background: #ff6b35;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .phone-footer {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .cart-icon {
-            width: 40px;
-            height: 40px;
-            background: #ff6b35;
+            background: white;
+            padding: 3rem;
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            box-shadow: 0 10px 40px rgba(244, 147, 64, 0.1);
+            border: 2px solid rgba(244, 147, 64, 0.1);
         }
 
-        /* Download Section */
-        .download-section h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #333;
-        }
-
-        .download-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s ease;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .app-store {
-            background: #000;
-            color: white;
-        }
-
-        .google-play {
-            background: #01875f;
-            color: white;
-        }
-
-        .download-btn img {
-            height: 50px;
-            width: auto;
-        }
-
-        /* About Section */
-        .about-section {
-            background: white;
-            padding: 60px 0;
-            margin: 40px 0;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .about-section h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #333;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #666;
-        }
-
-        /* Support Section */
-        .support-section {
-            background: white;
-            padding: 60px 0;
-            margin: 40px 0;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .support-section h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #333;
-        }
-
-        .support-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .support-item::before {
-            content: '📧';
-            margin-right: 15px;
-            font-size: 1.5rem;
-        }
-
-        .support-email {
-            background: #ff6b35;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s ease;
-        }
-
-        .support-email:hover {
-            background: #e55a2b;
-        }
-
-        /* Links Section */
-        .links-section {
-            background: white;
-            padding: 60px 0;
-            margin: 40px 0;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .links-section h2 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: #333;
-        }
-
-        .link-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 0;
+        .problem-item {
+            padding: 1.5rem 0;
             border-bottom: 1px solid #f0f0f0;
-            text-decoration: none;
-            color: #333;
-            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            color: #4C443E;
         }
 
-        .link-item:hover {
-            color: #ff6b35;
+        .problem-item:last-child {
+            border-bottom: none;
         }
 
-        .link-item::after {
-            content: '→';
-            font-size: 1.2rem;
-            color: #ccc;
+        .problem-item::before {
+            content: "💭";
+            margin-right: 1rem;
         }
 
-        /* Footer */
-        .footer {
-            background: #8b4513;
-            color: white;
+        .solution-text {
+            margin-top: 2rem;
             text-align: center;
-            padding: 30px 0;
-            margin-top: 60px;
+            font-size: 1.2rem;
+            color: #F49340;
+            font-weight: bold;
         }
 
-        /* Responsive Design */
+        /* 機能紹介セクション */
+        .features {
+            background: #FEFEFE;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(244, 147, 64, 0.08);
+            border: 2px solid rgba(244, 147, 64, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(244, 147, 64, 0.2);
+            border-color: rgba(244, 147, 64, 0.3);
+        }
+
+        .feature-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #F49340 0%, #ff8c42 100%);
+            color: #FEFEFE;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4C443E;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .feature-card li {
+            padding: 0.5rem 0;
+            color: #4C443E;
+            opacity: 0.9;
+        }
+
+        .feature-card li::before {
+            content: "✓";
+            color: #F49340;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .feature-description {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f0f0f0;
+            color: #4C443E;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+
+        /* CTAセクション */
+        .cta {
+            background: linear-gradient(135deg, #F49340 0%, #ff8c42 100%);
+            color: #FEFEFE;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .cta h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-highlight {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 2.5rem;
+        }
+
+        /* フッター */
+        footer {
+            background: #4C443E;
+            color: #FEFEFE;
+            padding: 3rem 20px 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(254, 254, 254, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #F49340;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(254, 254, 254, 0.1);
+            color: rgba(254, 254, 254, 0.6);
+        }
+
+        /* アニメーション */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* レスポンシブ対応 */
         @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
+            .hero-image {
+                height: 500px;
             }
 
-            .app-title {
-                font-size: 2rem;
-            }
-
-            .phone {
-                width: 240px;
-                height: 480px;
-            }
-
-            .container {
-                padding: 0 15px;
-            }
-
-            .about-section,
-            .support-section,
-            .links-section {
-                margin: 20px 0;
-                padding: 40px 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header {
-                padding: 40px 0;
-            }
-
-            .app-title {
+            .hero h1 {
                 font-size: 1.8rem;
             }
 
-            .phone {
-                width: 200px;
-                height: 400px;
+            .hero .subtitle {
+                font-size: 1rem;
             }
 
-            .download-buttons {
-                width: 100%;
+            .hero .tagline {
+                font-size: 1rem;
             }
 
-            .download-btn {
-                width: 100%;
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .problem-list {
+                padding: 2rem 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="app-icon">
-                <img src="images/app-icon.png" alt="トクリス アプリアイコン" />
-            </div>
-            <h1 class="app-title">トクリス</h1>
-            <p class="app-subtitle">スーパーの価格を比較して、賢く節約</p>
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-content">
+            <div class="logo">トクリス</div>
+            <nav>
+                <a href="#features">機能</a>
+                <a href="#download">ダウンロード</a>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <section class="main-content">
-            <div class="phone-mockup">
-                <!-- 実際のスクリーンショット画像を使用する場合 -->
-                <img src="images/phone-mockup.png" alt="トクリス アプリ画面" />
-                
-               
-
-            <div class="download-section">
-                <h2>アプリをダウンロード</h2>
-            </div>
-        </section>
-
-        <section class="about-section">
-            <div class="container">
-                <h2>アプリについて</h2>
-                <p class="about-text">
-                    「あれ？これって普段いくらだっけ？」</br>「こっちの方が安かったかも…」
-                </br>そんな思いを減らすためのアプリです。
-</br>毎日の買い物で、どのお店が一番お得か、迷ったことはありませんか？
-トクリスは商品ごとに複数のスーパーの価格を簡単に比較でき、最安値を見つけるのをサポートします。
-                </p>
-            </div>
-        </section>
-
-        <section class="support-section">
-            <div class="container">
-                <h2>サポート・お問い合わせ</h2>
-                <div class="support-item">
-                    <span>メールでのお問い合わせ</span>
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <img src="images/hero-image.png" alt="トクリスアプリ" class="hero-image">
+        <div class="hero-overlay">
+                <div class="download-btn">
+                    <a href="https://apps.apple.com/jp/app/%E3%83%88%E3%82%AF%E3%83%AA%E3%82%B9-%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E4%BE%A1%E6%A0%BC%E6%AF%94%E8%BC%83-%E8%B2%B7%E3%81%84%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88/id6749035744?itscg=30200&itsct=apps_box_badge&mttnsubad=6749035744">
+                        <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ja-jp?releaseDate=1754265600" alt="App Storeでダウンロード">
+                    </a>
                 </div>
-                <p style="margin-bottom: 20px; color: #666;">
-                    アプリの使い方やトラブルについてお気軽にお問い合わせください。
-                </p>
-                <a href="mailto:yunpenstudio@gmail.com" class="support-email">
-                    yunpenstudio@gmail.com
-                </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="links-section">
-            <div class="container">
-                <h2>関連リンク</h2>
-                <a href="privacy-policy.html" class="link-item">
-                    <span>プライバシーポリシー</span>
-                </a>
-                <a href="tos.html" class="link-item">
-                    <span>利用規約</span>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
+    <!-- 問題提起セクション -->
+    <section class="problems">
         <div class="container">
+            <h2 class="section-title">こんな悩みを解決します</h2>
+            <div class="problem-list">
+                <div class="problem-item">何軒もスーパーをまわって疲れる…</div>
+                <div class="problem-item">あの店の方が安かったかも…</div>
+                <div class="problem-item">結局どこが一番お得なの?</div>
+                <div class="solution-text">
+                    トクリスなら、レシートを撮るだけで全て解決。<br>
+                    節約上手が「本当に欲しかった機能」を詰め込みました。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 機能紹介セクション -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">トクリスの3大機能</h2>
+            <div class="feature-grid">
+                <!-- 機能1 -->
+                <div class="feature-card">
+                    <div class="feature-number">1</div>
+                    <h3>商品一覧で最安値を常に表示</h3>
+                    <ul>
+                        <li>登録した商品の最安値を一覧表示</li>
+                        <li>複数店舗から自動で最安値を検索</li>
+                        <li>100gあたり、1個あたりなど単位別で自動計算</li>
+                        <li>価格推移で買い時も一目瞭然</li>
+                    </ul>
+                    <div class="feature-description">
+                        同じ商品でも、店によって値段は違う。<br>
+                        トクリスなら「いつ」「どこで」買えば最安値かがすぐわかります。
+                    </div>
+                </div>
+
+                <!-- 機能2 -->
+                <div class="feature-card">
+                    <div class="feature-number">2</div>
+                    <h3>買い物リストで賢くお買い物</h3>
+                    <ul>
+                        <li>買うものの最安値店舗を自動表示</li>
+                        <li>「どこで何を買えば最安か」が一目でわかる</li>
+                        <li>店舗別・カテゴリー別に並び替え可能</li>
+                        <li>無駄な移動時間とガソリン代を削減</li>
+                    </ul>
+                    <div class="feature-description">
+                        「このスーパーでは牛乳、あのスーパーでは卵」<br>
+                        効率的なルートで、賢く買い物ができます。
+                    </div>
+                </div>
+
+                <!-- 機能3 -->
+                <div class="feature-card">
+                    <div class="feature-number">3</div>
+                    <h3>レシート読み取りで超簡単登録</h3>
+                    <ul>
+                        <li>レシートを撮影するだけで自動読み取り</li>
+                        <li>複数商品を一括登録</li>
+                    </ul>
+                    <div class="feature-description">
+                        レシートを撮るだけで、すべての価格データが蓄積されます。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta" id="download">
+        <div class="container">
+            <h2>家計を守る、かしこい買い物術。</h2>
+            <p>トクリスで始める、新しい節約生活。</p>
+            <div class="cta-highlight">
+                今すぐ無料ダウンロードして、<br>新しい節約生活を楽しもう!
+            </div>
+            <div class="download-btn">
+                <a href="https://apps.apple.com/jp/app/%E3%83%88%E3%82%AF%E3%83%AA%E3%82%B9-%E3%82%B9%E3%83%BC%E3%83%91%E3%83%BC%E4%BE%A1%E6%A0%BC%E6%AF%94%E8%BC%83-%E8%B2%B7%E3%81%84%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88/id6749035744?itscg=30200&itsct=apps_box_badge&mttnsubad=6749035744">
+                    <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/ja-jp?releaseDate=1754265600" alt="App Storeでダウンロード">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>リンク</h3>
+                <a href="#features">機能紹介</a>
+                <a href="#download">ダウンロード</a>
+            </div>
+            <div class="footer-section">
+                <h3>アプリ情報</h3>
+                <a href="privacy-policy.html">プライバシーポリシー</a>
+                <a href="tos.html">利用規約</a>
+            </div>
+        </div>
+        <div class="copyright">
             <p>© 2025 Yunpun Studio</p>
         </div>
     </footer>
+
+    <script>
+        // スムーススクロール機能
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // スクロールアニメーション
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // アニメーション対象の要素を設定
+        document.querySelectorAll('.feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
